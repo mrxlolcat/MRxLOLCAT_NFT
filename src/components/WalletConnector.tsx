@@ -42,12 +42,12 @@ export function WalletConnector() {
       wallets={wallets}
       connectModal={{ 
         size: "wide",
-        title: "MRxLOLCAT MATRIX",
+        title: "MRxLOLCAT ACCESS",
         titleIcon: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
         showThirdwebBranding: false,
         welcomeScreen: {
-          title: "Welcome to the Matrix",
-          subtitle: "Initialize your connection to access the Genesis Protocol.",
+          title: "MRxLOLCAT Official Minter",
+          subtitle: "Connect your wallet to participate in the Genesis Collection.",
           img: {
             src: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
             width: 150,
@@ -74,7 +74,7 @@ export function WalletConnector() {
       })}
       connectButton={{
         className: "!bg-[#00f2ff]/10 !text-[#00f2ff] !border !border-[#00f2ff]/30 !rounded-xl !px-5 !py-2.5 !text-[11px] !font-black !uppercase hover:!bg-[#00f2ff]/20 hover:!shadow-[0_0_15px_rgba(0,242,255,0.4)] transition-all duration-300",
-        label: "CONNECT TO MATRIX"
+        label: "Connect Wallet"
       }}
       detailsButton={{
         className: "!bg-white/5 !text-white !border !border-white/10 !rounded-xl !px-4 !py-2 !text-[11px] !font-bold hover:!bg-white/10 transition-all",

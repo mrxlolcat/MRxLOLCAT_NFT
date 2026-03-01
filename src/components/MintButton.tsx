@@ -30,7 +30,7 @@ export function MintButton({ disabled, onSuccess }: { disabled?: boolean, onSucc
             colors: ['#ff69b4', '#9370db', '#00f2ff']
           });
           onSuccess?.();
-          alert("✨ NFT Minted! Welcome to MRxLOLCAT.");
+          alert("NFT Minted! Welcome to MRxLOLCAT.");
         }}
         disabled={disabled}
         className={`!w-full !py-4 !rounded-2xl !font-black !text-lg transition-all ${
@@ -41,7 +41,7 @@ export function MintButton({ disabled, onSuccess }: { disabled?: boolean, onSucc
       >
         <div className="flex items-center justify-center gap-2">
           <Rocket size={20} fill={disabled ? "none" : "currentColor"} />
-          MINT NFT GRATIS
+          MINT NFT
         </div>
       </TransactionButton>
     </motion.div>

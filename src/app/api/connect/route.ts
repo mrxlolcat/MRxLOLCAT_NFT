@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         <head>
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:image" content="https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg" />
-          <meta property="fc:frame:button:1" content="✨ Mint MRxLOLCAT-NFT" />
+          <meta property="fc:frame:button:1" content="Mint MRxLOLCAT-NFT" />
           <meta property="fc:frame:button:1:action" content="tx" />
           <meta property="fc:frame:button:1:target" content="${baseUrl}/api/mint" />
         </head>

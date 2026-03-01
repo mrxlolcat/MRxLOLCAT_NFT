@@ -38,12 +38,12 @@ const miniAppConfig = {
 const stringifiedConfig = JSON.stringify(miniAppConfig);
 
 export const metadata: Metadata = {
-  title: 'MRxLOLCAT GENESIS Pass Airdrop Portal',
-  description: 'MRxLOLCAT NFT is your premium gateway to Base. Mint your Genesis Pass to unlock gasless experiences and airdrop priority.',
+  title: 'MRxLOLCAT GENESIS NFT Airdrop Portal',
+  description: 'MRxLOLCAT NFT is your premium gateway to Base. Mint your NFT Collection to unlock gasless experiences and airdrop priority.',
   manifest: '/manifest.json',
   openGraph: {
-    title: 'MRxLOLCAT GENESIS Pass Airdrop Portal',
-    description: 'Mint your Genesis Pass to unlock exclusive Base ecosystem rewards and airdrop priority access.',
+    title: 'MRxLOLCAT GENESIS NFT Airdrop Portal',
+    description: 'Mint your NFT Collection to unlock exclusive Base ecosystem rewards and airdrop priority access.',
     url: APP_URL,
     siteName: 'MRxLOLCAT GENESIS',
     images: [
