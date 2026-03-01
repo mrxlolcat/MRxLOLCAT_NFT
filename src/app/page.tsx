@@ -66,7 +66,9 @@ export default function MRxLOLCATBaseApp() {
             <p className="text-[7px] font-black text-secondary uppercase tracking-widest mt-0.5">Base Protocol</p>
           </div>
         </div>
-        <WalletConnector />
+        <div className="flex items-center gap-2 scale-90 origin-right">
+          <WalletConnector />
+        </div>
       </header>
 
       <div className="relative z-10 px-4 pt-6 space-y-8 pb-20">
@@ -155,7 +157,9 @@ export default function MRxLOLCATBaseApp() {
               <div className="text-center p-8 border border-dashed border-white/10 rounded-2xl">
                 <Wallet className="mx-auto text-slate-600 mb-3" size={32} />
                 <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest italic mb-4">Authorization Required</p>
-                <WalletConnector />
+                <div className="flex items-center gap-2 scale-90 origin-right">
+          <WalletConnector />
+        </div>
               </div>
             )}
           </div>
