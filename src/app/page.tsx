@@ -74,17 +74,21 @@ export default function MRxLOLCATBaseApp() {
           </header>
 
           {/* NFT Showcase */}
-          <NFTProvider contract={nftContract} tokenId={0n}>
-            <div className="relative aspect-square w-full rounded-2xl overflow-hidden border border-white/10 group bg-black/40">
-              <NFTMedia className="object-cover w-full h-full animate-float" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 text-left">
-                <span className="bg-white/10 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest border border-white/10 mb-2 inline-block">Official Collection</span>
-                <NFTName className="text-2xl font-black italic uppercase text-white tracking-tighter" />
-                <NFTDescription className="text-[10px] text-zinc-500 line-clamp-1" />
+          {mounted ? (
+            <NFTProvider contract={nftContract} tokenId={0n}>
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden border border-white/10 group bg-black/40">
+                <NFTMedia className="object-cover w-full h-full animate-float" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 text-left">
+                  <span className="bg-white/10 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest border border-white/10 mb-2 inline-block">Official Collection</span>
+                  <NFTName className="text-2xl font-black italic uppercase text-white tracking-tighter" />
+                  <NFTDescription className="text-[10px] text-zinc-500 line-clamp-1" />
+                </div>
               </div>
-            </div>
-          </NFTProvider>
+            </NFTProvider>
+          ) : (
+            <div className="relative aspect-square w-full rounded-2xl bg-zinc-900 animate-pulse" />
+          )}
 
           {/* Stats Bar */}
           <div className="grid grid-cols-2 gap-3">

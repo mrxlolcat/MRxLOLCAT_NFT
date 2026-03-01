@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import { ThirdwebProvider } from "thirdweb/react";
+import { RootProviders } from '@/components/RootProviders'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-black text-white">
-        <ThirdwebProvider>
+        <RootProviders>
           {children}
-        </ThirdwebProvider>
+        </RootProviders>
       </body>
     </html>
   )
