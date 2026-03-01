@@ -5,13 +5,16 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
+  --matrix-blue: #00f2ff;
+  --lolcat-pink: #ff69b4;
+  --lolcat-purple: #9370db;
 }
 
 body {
   background: #0a0a0a;
   color: #ffffff;
   font-family: sans-serif;
-  margin: 0;
+  overflow-x: hidden;
 }
 
 .cyber-grid {
@@ -22,8 +25,40 @@ body {
 }
 
 .glass-card {
-  background: #111111;
-  border: 1px solid #333333;
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: 0.5s;
+}
+
+.shine-sweep:hover::after {
+  left: 100%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
 .glow-blue {

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import { Providers } from '@/components/Providers'
+import { ThirdwebProvider } from "thirdweb/react";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'MRxLOLCAT NFT Minter',
-  description: 'Official Genesis Collection on Base Mainnet.',
+  description: 'Official Collection on Base Mainnet.',
   other: {
     "fc:frame": "vNext",
     "fc:frame:image": "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-black text-white">
-        <Providers>
+        <ThirdwebProvider>
           {children}
-        </Providers>
+        </ThirdwebProvider>
       </body>
     </html>
   )
