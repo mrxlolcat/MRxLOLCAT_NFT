@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Zap, ShieldCheck, Rocket, CheckCircle2, Share2, Wallet, Lock, ExternalLink, Loader2
+  Zap, ShieldCheck, Rocket, CheckCircle2, Share2, Wallet, ExternalLink, Loader2, Info
 } from 'lucide-react';
 import { 
   useActiveAccount, 
@@ -12,51 +11,23 @@ import {
   NFTProvider,
   NFTMedia,
   NFTName,
-  NFTDescription,
+  NFTDescription
 } from 'thirdweb/react';
 import { claimTo } from "thirdweb/extensions/erc1155";
 import { nftContract, client } from "@/lib/thirdweb-client";
 import { WalletConnector } from "@/components/WalletConnector";
 import { base } from "thirdweb/chains";
-import { darkTheme } from "thirdweb/react";
-import confetti from "canvas-confetti";
 import { toast, Toaster } from "sonner";
-
-// Component: Skeleton Loader
-const Skeleton = ({ className }: { className: string }) => (
-  <div className={`bg-white/5 animate-pulse rounded ${className}`} />
-);
-
-// Component: Animated Counter
-const AnimatedCounter = ({ value }: { value: number }) => {
-  const [displayValue, setDisplayValue] = useState(0);
-  useEffect(() => {
-    const duration = 1500;
-    const start = displayValue;
-    const end = value;
-    const startTime = performance.now();
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const current = Math.floor(start + (end - start) * progress);
-      setDisplayValue(current);
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, [value]);
-  return <span>{displayValue.toLocaleString()}</span>;
-};
 
 export default function MRxLOLCATBaseApp() {
   const account = useActiveAccount();
-  const [step, setStep] = useState(1);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const { data: totalSupply, isLoading: loadingSupply } = useReadContract({
+  const { data: totalSupply } = useReadContract({
     contract: nftContract,
     method: "function totalSupply(uint256 id) view returns (uint256)",
     params: [0n],
@@ -68,143 +39,91 @@ export default function MRxLOLCATBaseApp() {
     params: [account?.address || "0x0000000000000000000000000000000000000000", 0n],
   });
 
-  useEffect(() => {
-    if (!account) setStep(1);
-    else if (balance && balance > 0n) setStep(3);
-    else setStep(2);
-  }, [account, balance]);
-
-  const shareToWarpcast = () => {
-    const text = `I just secured my MRxLOLCAT Genesis Pass on Base! Join the collection at @mrxlolcat`;
-    const url = "https://mrxlolcat-nft.vercel.app";
-    const castUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(url)}`;
-    window.open(castUrl, "_blank");
-  };
-
-  if (!mounted) return <main className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="animate-spin text-matrix-blue" /></main>;
+  if (!mounted) return null;
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative mesh-bg">
+    <main className="min-h-screen bg-[#050505] text-white flex flex-col items-center justify-center p-4 cyber-grid">
       <Toaster position="top-center" richColors theme="dark" />
       
-      {/* Decorative Grid Overlay */}
-      <div className="fixed inset-0 matrix-bg opacity-30 pointer-events-none" />
+      <div className="w-full max-w-[420px] bg-[#111111] border border-zinc-800 rounded-3xl p-6 flex flex-col gap-6 shadow-2xl">
+        
+        {/* Header */}
+        <header className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Zap size={20} className="text-matrix-blue" fill="currentColor" />
+            <span className="font-black tracking-tighter text-lg">MRxLOLCAT</span>
+          </div>
+          <WalletConnector />
+        </header>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-[450px] relative z-10"
-      >
-        <div className="glass-card neon-glow-card rounded-[40px] p-8 flex flex-col gap-8 shadow-2xl">
-          
-          <header className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-matrix-blue to-lolcat-purple rounded-2xl flex items-center justify-center shadow-lg shadow-matrix-blue/20">
-                <Zap size={20} className="text-black" fill="currentColor" />
-              </div>
-              <div>
-                <h1 className="font-black text-lg tracking-tight text-white leading-none">MRxLOLCAT</h1>
-                <p className="text-[8px] font-black text-matrix-blue tracking-[0.3em] mt-1 uppercase">Protocol Live</p>
-              </div>
-            </div>
-            <div className="scale-90 origin-right">
-              <WalletConnector />
-            </div>
-          </header>
-
-          <NFTProvider contract={nftContract} tokenId={0n}>
-            <div className="relative aspect-square w-full rounded-[32px] overflow-hidden border-2 border-white/10 group bg-black/20 shadow-inner">
-              <NFTMedia className="object-cover w-full h-full animate-float-slow transition-transform duration-1000 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-6 left-6 text-left">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-matrix-blue/90 text-black text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-neon-blue">Verified Collection</span>
-                </div>
-                <NFTName className="text-3xl font-black italic uppercase text-white tracking-tighter glow-blue" />
-                <NFTDescription 
-                  className="text-[10px] text-zinc-400 font-medium italic mt-2 line-clamp-2 leading-tight"
-                  loadingComponent={<Skeleton className="h-4 w-64 mt-2" />}
-                />
-              </div>
-            </div>
-          </NFTProvider>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
-              <p className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mb-1 font-mono">Current Supply</p>
-              <div className="text-xl font-black text-white">
-                {loadingSupply ? <Skeleton className="h-6 w-full" /> : <><AnimatedCounter value={Number(totalSupply || 0)} /> <span className="text-[10px] opacity-30 font-normal">/ 10,000</span></>}
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm text-center">
-              <p className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mb-1 font-mono">Price Status</p>
-              <div className="text-xl font-black text-matrix-blue uppercase glow-blue">FREE</div>
+        {/* NFT Media */}
+        <NFTProvider contract={nftContract} tokenId={0n}>
+          <div className="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-800 bg-black">
+            <NFTMedia className="w-full h-full object-cover" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <NFTName className="text-xl font-black italic uppercase glow-blue" />
+              <NFTDescription className="text-[10px] text-zinc-500 line-clamp-1" />
             </div>
           </div>
+        </NFTProvider>
 
-          <div className="flex flex-col gap-4">
-            <AnimatePresence mode="wait">
-              {step === 1 && (
-                <motion.div key="s1" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }}>
-                  <div className="p-6 rounded-[24px] bg-white/5 border border-matrix-blue/30 text-center space-y-4">
-                    <Wallet className="mx-auto text-matrix-blue opacity-50" size={32} />
-                    <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-relaxed">Secure protocol authorization required to participate.</p>
-                    <button onClick={() => toast.info("Connect using the top-right button")} className="w-full py-4 rounded-2xl bg-matrix-blue text-black font-black text-[11px] uppercase tracking-widest hover:opacity-90 transition-all">Initialize Connection</button>
-                  </div>
-                </motion.div>
-              )}
-
-              {step === 2 && (
-                <motion.div key="s2" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
-                  <TransactionButton
-                    transaction={() => {
-                      toast.loading("Broadcasting to Base Mainnet...");
-                      return claimTo({ contract: nftContract, to: account?.address || "", tokenId: 0n, quantity: 1n });
-                    }}
-                    onTransactionConfirmed={() => {
-                      toast.success("Transaction Confirmed!");
-                      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#00f2ff', '#ff69b4', '#9370db'] });
-                    }}
-                    onError={(err) => toast.error(`Reverted: ${err.message}`)}
-                    className="!w-full !bg-gradient-to-r !from-matrix-blue !to-lolcat-purple !text-black !font-black !py-6 !rounded-[24px] !text-sm !uppercase !tracking-[0.2em] !shadow-neon-blue transition-all active:scale-95"
-                  >
-                    MINT GENESIS PASS
-                  </TransactionButton>
-                </motion.div>
-              )}
-
-              {step === 3 && (
-                <motion.div key="s3" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-                  <div className="flex flex-col gap-4">
-                    <div className="bg-emerald-500/10 border border-emerald-500/30 p-5 rounded-[24px] flex items-center gap-4">
-                      <CheckCircle2 className="text-emerald-400" size={28} />
-                      <div>
-                        <p className="font-black text-sm text-white uppercase italic tracking-tight">Access Verified</p>
-                        <p className="text-[9px] text-emerald-400 font-bold uppercase tracking-widest mt-0.5">Asset successfully secured on Base</p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button onClick={shareToWarpcast} className="bg-white text-black font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-zinc-200 transition-all shadow-lg flex items-center justify-center gap-2">
-                        <Share2 size={14} /> Share Access
-                      </button>
-                      <a href={`https://basescan.org/address/0xba968fA5d5255d6D95bD23D69bA63De13ceFF731`} target="_blank" className="bg-white/5 border border-white/10 text-white font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white/10">
-                        <ExternalLink size={14} /> Explorer
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-3 text-center">
+          <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl">
+            <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-1">Supply</p>
+            <p className="font-black text-white">{totalSupply?.toString() || "0"} <span className="opacity-20">/ 10k</span></p>
           </div>
-
-          <footer className="pt-6 border-t border-white/5 flex flex-col items-center gap-2 opacity-40">
-            <div className="flex items-center gap-2 text-[9px] font-mono text-matrix-blue tracking-tighter uppercase">
-              <ShieldCheck size={12} /> Encrypted Session • Base Mainnet
-            </div>
-            <p className="text-[8px] font-black tracking-[0.6em] text-white/50">MRxLOLCAT PROTOCOL</p>
-          </footer>
+          <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl">
+            <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-1">Price</p>
+            <p className="font-black text-matrix-blue">FREE</p>
+          </div>
         </div>
-      </motion.div>
+
+        {/* Main Action */}
+        <div className="space-y-4">
+          {!account ? (
+            <div className="bg-zinc-900/50 border border-dashed border-zinc-800 p-8 rounded-2xl text-center">
+              <Wallet className="mx-auto text-zinc-700 mb-2" size={24} />
+              <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest mb-4">Connect wallet to mint</p>
+              <div className="flex justify-center scale-110"><WalletConnector /></div>
+            </div>
+          ) : (balance && balance > 0n) ? (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-2xl flex items-center gap-3">
+              <CheckCircle2 className="text-emerald-400" size={20} />
+              <div>
+                <p className="text-xs font-black uppercase">Asset Secured</p>
+                <a 
+                  href={`https://basescan.org/address/0xba968fA5d5255d6D95bD23D69bA63De13ceFF731`} 
+                  target="_blank"
+                  className="text-[10px] text-emerald-400 underline"
+                >
+                  View on Explorer
+                </a>
+              </div>
+            </div>
+          ) : (
+            <TransactionButton
+              transaction={() => claimTo({
+                contract: nftContract,
+                to: account.address,
+                tokenId: 0n,
+                quantity: 1n,
+              })}
+              onTransactionConfirmed={() => toast.success("Mint Successful!")}
+              onError={(err) => toast.error("Mint failed: " + err.message)}
+              className="!w-full !bg-matrix-blue !text-black !font-black !py-4 !rounded-xl !text-sm !uppercase !tracking-widest hover:!opacity-90 transition-opacity"
+            >
+              MINT NFT
+            </TransactionButton>
+          )}
+        </div>
+
+        <footer className="flex items-center justify-center gap-2 opacity-20">
+          <Info size={10} />
+          <p className="text-[8px] font-mono tracking-widest uppercase">Base Mainnet Active</p>
+        </footer>
+
+      </div>
     </main>
   );
 }
