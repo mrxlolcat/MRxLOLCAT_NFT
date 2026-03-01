@@ -40,11 +40,6 @@ export function WalletConnector() {
       client={client}
       chain={base}
       wallets={wallets}
-      // ENABLE GASLESS TRANSACTIONS (ACCOUNT ABSTRACTION)
-      accountAbstraction={{
-        chain: base,
-        sponsorGas: true,
-      }}
       connectModal={{ 
         size: "wide",
         title: "MRxLOLCAT MATRIX",
