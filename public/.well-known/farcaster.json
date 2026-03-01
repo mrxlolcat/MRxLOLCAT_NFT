@@ -1,0 +1,51 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjI3ODkwMTUsInR5cGUiOiJhdXRoIiwia2V5IjoiMHg2NDZhZTFlODgxNzIwNTc0RkM3RGEzMEVlOTJhYWU4QzIwQTFiODFiIn0",
+    "payload": "eyJkb21haW4iOiJvdXdpYm8tbmZ0LnZlcmNlbC5hcHAifQ",
+    "signature": "0gRv+WFuFjofIca9NURTx/VaD5uOCbVGotl1mBliq60IjZsgFypDTGWQh7VkeVCALAqnLT+CeO7bfkSt8TI9wRw="
+  },
+  "frame": {
+    "appId": "69a11773dce51e894f97278f",
+    "version": "1",
+    "name": "OUWIBO GENESIS",
+    "subtitle": "Genesis Pass Airdrop Portal",
+    "description": "Ouwibo NFT is your premium gateway to Base. Mint your Genesis Pass to unlock gasless experiences, exclusive rewards, and priority access to the Ouwibo Airdrop ecosystem.",
+    "tagline": "The Gateway to Base Airdrops",
+    "iconUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "homeUrl": "https://ouwibo-nft.vercel.app",
+    "imageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "splashImageUrl": "https://ouwibo-nft.vercel.app/loading.svg",
+    "splashBackgroundColor": "#020617",
+    "webhookUrl": "https://ouwibo-nft.vercel.app/api/webhook",
+    "primaryCategory": "art-creativity",
+    "tags": ["nft", "base", "airdrop", "ouwibo", "genesis"],
+    "ogTitle": "OUWIBO NFT Genesis Pass",
+    "ogDescription": "Mint your Genesis Pass to unlock exclusive Base ecosystem rewards and airdrop priority access.",
+    "ogImageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "heroImageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "screenshotUrls": ["https://ouwibo-nft.vercel.app/ouwibo-nft.png"],
+    "noindex": false
+  },
+  "miniapp": {
+    "appId": "69a11773dce51e894f97278f",
+    "version": "1",
+    "name": "OUWIBO GENESIS",
+    "subtitle": "Genesis Pass Airdrop Portal",
+    "description": "Ouwibo NFT is your premium gateway to Base. Mint your Genesis Pass to unlock gasless experiences, exclusive rewards, and priority access to the Ouwibo Airdrop ecosystem.",
+    "tagline": "The Gateway to Base Airdrops",
+    "iconUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "homeUrl": "https://ouwibo-nft.vercel.app",
+    "imageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "splashImageUrl": "https://ouwibo-nft.vercel.app/loading.svg",
+    "splashBackgroundColor": "#020617",
+    "webhookUrl": "https://ouwibo-nft.vercel.app/api/webhook",
+    "primaryCategory": "art-creativity",
+    "tags": ["nft", "base", "airdrop", "ouwibo", "genesis"],
+    "ogTitle": "OUWIBO NFT Genesis Pass",
+    "ogDescription": "Mint your Genesis Pass to unlock exclusive Base ecosystem rewards and airdrop priority access.",
+    "ogImageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "heroImageUrl": "https://ouwibo-nft.vercel.app/ouwibo-nft.png",
+    "screenshotUrls": ["https://ouwibo-nft.vercel.app/ouwibo-nft.png"],
+    "noindex": false
+  }
+}

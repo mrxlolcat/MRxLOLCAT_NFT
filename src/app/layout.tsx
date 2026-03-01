@@ -1,43 +1,82 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ThirdwebProvider } from "thirdweb/react";
+import type { Metadata, Viewport } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { RootClientLayout } from '@/components/RootClientLayout'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
-export const metadata: Metadata = {
-  title: "MRxLOLCAT NFT",
-  description: "Farcaster Mini App Minter",
-  other: {
-    "fc:frame": "vNext",
-    "fc:frame:image": "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-    "fc:frame:button:1": "🐱 Connect Wallet",
-    "fc:frame:button:2": "✨ Mint NFT Gratis",
-    "fc:frame:button:3": "🎁 Claim 1000 LOLCAT",
-    "fc:frame:post_url": "https://mrxlolcat-nft.vercel.app/api/connect",
+const APP_URL = process.env.NEXT_PUBLIC_VERCEL_URL 
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` 
+  : "https://mrxlolcat-nft.vercel.app";
+
+const miniAppConfig = {
+  version: "1",
+  imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+  button: {
+    title: "Launch MRxLOLCAT",
+    action: {
+      type: "launch_frame",
+      name: "MRxLOLCAT GENESIS",
+      url: APP_URL,
+      splashImageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+      splashBackgroundColor: "#020617",
+    },
   },
 };
 
+const stringifiedConfig = JSON.stringify(miniAppConfig);
+
+export const metadata: Metadata = {
+  title: 'MRxLOLCAT GENESIS Pass Airdrop Portal',
+  description: 'MRxLOLCAT NFT is your premium gateway to Base. Mint your Genesis Pass to unlock gasless experiences and airdrop priority.',
+  manifest: '/manifest.json',
+  openGraph: {
+    title: 'MRxLOLCAT GENESIS Pass Airdrop Portal',
+    description: 'Mint your Genesis Pass to unlock exclusive Base ecosystem rewards and airdrop priority access.',
+    url: APP_URL,
+    siteName: 'MRxLOLCAT GENESIS',
+    images: [
+      {
+        url: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        width: 1200,
+        height: 800,
+        alt: 'MRxLOLCAT GENESIS Preview',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  other: {
+    "base:app_id": "69a11773dce51e894f97278f",
+    "fc:miniapp": stringifiedConfig,
+    "fc:frame": stringifiedConfig,
+    "fc:frame:image": "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+    "fc:frame:button:1": "Launch MRxLOLCAT",
+    "fc:frame:button:1:action": "post_redirect",
+  },
+}
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050505] text-white`}>
-        <ThirdwebProvider>
+    <html lang="id" className={`${inter.variable}`}>
+      <body className="antialiased font-sans bg-black text-white">
+        <RootClientLayout>
           {children}
-        </ThirdwebProvider>
+        </RootClientLayout>
       </body>
     </html>
-  );
+  )
 }
