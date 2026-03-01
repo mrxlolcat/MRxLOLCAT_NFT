@@ -21,6 +21,11 @@ import { darkTheme } from "thirdweb/react";
 import confetti from "canvas-confetti";
 import { toast, Toaster } from "sonner";
 
+// Component: Skeleton Loader
+const Skeleton = ({ className }: { className: string }) => (
+  <div className={`bg-white/5 animate-pulse rounded ${className}`} />
+);
+
 // Component: Animated Counter
 const AnimatedCounter = ({ value }: { value: number }) => {
   const [displayValue, setDisplayValue] = useState(0);
@@ -115,20 +120,24 @@ export default function MRxLOLCATBaseApp() {
                   <span className="bg-matrix-blue/90 text-black text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-neon-blue">Verified Collection</span>
                 </div>
                 <NFTName className="text-3xl font-black italic uppercase text-white tracking-tighter glow-blue" />
+                <NFTDescription 
+                  className="text-[10px] text-zinc-400 font-medium italic mt-2 line-clamp-2 leading-tight"
+                  loadingComponent={<Skeleton className="h-4 w-64 mt-2" />}
+                />
               </div>
             </div>
           </NFTProvider>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-black/40 border border-white/5 rounded-[24px] p-5 backdrop-blur-md">
-              <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1 font-mono">Current Supply</p>
-              <p className="text-2xl font-black text-white">
-                {loadingSupply ? "..." : <><AnimatedCounter value={Number(totalSupply || 0)} /> <span className="text-xs opacity-20 font-normal">/ 10,000</span></>}
-              </p>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+              <p className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mb-1 font-mono">Current Supply</p>
+              <div className="text-xl font-black text-white">
+                {loadingSupply ? <Skeleton className="h-6 w-full" /> : <><AnimatedCounter value={Number(totalSupply || 0)} /> <span className="text-[10px] opacity-30 font-normal">/ 10,000</span></>}
+              </div>
             </div>
-            <div className="bg-black/40 border border-white/5 rounded-[24px] p-5 backdrop-blur-md text-center">
-              <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1 font-mono">Price Status</p>
-              <p className="text-2xl font-black text-matrix-blue uppercase glow-blue">FREE</p>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm text-center">
+              <p className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mb-1 font-mono">Price Status</p>
+              <div className="text-xl font-black text-matrix-blue uppercase glow-blue">FREE</div>
             </div>
           </div>
 

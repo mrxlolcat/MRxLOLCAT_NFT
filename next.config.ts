@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
+        hostname: 'avatars.githubusercontent.com',
         port: '',
         pathname: '/**',
       },
@@ -21,8 +21,6 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  output: 'standalone',
-  transpilePackages: ['motion'],
   async headers() {
     return [
       {
@@ -33,6 +31,15 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
   },
 };
 
