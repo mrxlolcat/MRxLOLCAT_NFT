@@ -1,13 +1,21 @@
 'use client';
 
-import { ReactNode } from 'react';
-import dynamic from 'next/dynamic';
-
-const Providers = dynamic(
-  () => import('./Providers').then((mod) => mod.Providers),
-  { ssr: false }
-);
+import { ReactNode, useEffect, useState } from 'react';
+import { Providers } from './Providers';
 
 export function RootClientLayout({ children }: { children: ReactNode }) {
-  return <Providers>{children}</Providers>;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Ensure content renders but avoids server/client mismatch for Web3 state
+  return (
+    <Providers>
+      <div style={{ visibility: mounted ? 'visible' : 'hidden' }}>
+        {children}
+      </div>
+    </Providers>
+  );
 }

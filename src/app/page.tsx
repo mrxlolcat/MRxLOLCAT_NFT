@@ -12,6 +12,7 @@ import {
   NFTProvider,
   NFTMedia,
   NFTName,
+  NFTDescription,
 } from 'thirdweb/react';
 import { claimTo } from "thirdweb/extensions/erc1155";
 import { nftContract, client } from "@/lib/thirdweb-client";

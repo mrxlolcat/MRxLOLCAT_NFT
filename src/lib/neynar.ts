@@ -1,18 +1,20 @@
-import { NeynarAPIClient } from "@neynar/nodejs-sdk";
-
-export const neynarClient = process.env.NEYNAR_API_KEY 
-  ? new NeynarAPIClient(process.env.NEYNAR_API_KEY)
-  : null;
-
 export async function validateFrameMessage(messageBytes: string) {
-  if (!neynarClient) {
-    console.warn("Neynar client not initialized - missing NEYNAR_API_KEY");
+  if (!process.env.NEYNAR_API_KEY) {
+    console.warn("Neynar API Key missing");
     return null;
   }
   try {
-    const response = await neynarClient.validateFrameAction(messageBytes);
-    if (response.valid) {
-      return response;
+    const response = await fetch("https://api.neynar.com/v2/farcaster/frame/validate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api_key": process.env.NEYNAR_API_KEY
+      },
+      body: JSON.stringify({ message_bytes_in_hex: messageBytes })
+    });
+    const result = await response.json();
+    if (result.valid) {
+      return result;
     }
     return null;
   } catch (error) {
