@@ -96,7 +96,7 @@ export default function Home() {
                       colors: { accentText: "#00f2ff", accentButtonBg: "#00f2ff", modalBg: "#050505" } 
                     })}
                     connectButton={{ 
-                      className: "!w-full !py-3 !rounded-xl !bg-white/5 !text-white !font-black !border !border-white/10 !text-sm hover:!bg-white/10 transition-all",
+                      className: "!w-full !py-3 !rounded-xl !bg-white/5 !text-white !font-black !border !border-white/10 !text-sm hover:!bg-white/10 transition-all shine-sweep lift-hover",
                       label: "CONNECT WALLET"
                     }}
                   />
