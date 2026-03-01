@@ -5,8 +5,8 @@ import { nftContract } from "@/lib/thirdweb-client";
 export function SupplyCounter() {
   const { data: totalSupply, isLoading } = useReadContract({
     contract: nftContract,
-    method: "function totalSupply() view returns (uint256)",
-    params: [],
+    method: "function totalSupply(uint256) view returns (uint256)",
+    params: [0n],
   });
 
   return (

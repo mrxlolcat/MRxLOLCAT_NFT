@@ -78,13 +78,18 @@ export default function Home() {
               <ClaimTokenButton />
             </div>
 
-            {/* Contract Info */}
-            <div className="flex flex-col items-center gap-2 mt-2">
-              <div className="flex items-center gap-1 text-[9px] text-gray-600 font-mono">
-                <Info size={10} /> 0x3525fDbC54DC01121C8e12C3948187E6153Cdf25
-              </div>
-            </div>
+          <div className="text-center mt-2 flex flex-col gap-1">
+            <a href="https://basescan.org/address/0xba968fA5d5255d6D95bD23D69bA63De13ceFF731" target="_blank" rel="noreferrer" className="text-[10px] text-gray-500 font-mono hover:text-[#ff69b4] flex items-center justify-center gap-1">
+              <Info size={10} /> 0xba96...EF731
+            </a>
           </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-2 mt-2">
+          <div className="flex items-center gap-1 text-[9px] text-gray-600 font-mono italic">
+             EditionDrop ERC-1155 (Token #0)
+          </div>
+        </div>
 
           {/* Footer Branding */}
           <p className="text-center mt-6 text-[10px] text-white/20 font-mono uppercase tracking-[0.5em]">

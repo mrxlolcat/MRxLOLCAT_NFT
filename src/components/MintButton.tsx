@@ -1,6 +1,6 @@
 'use client';
 import { TransactionButton, useActiveAccount } from "thirdweb/react";
-import { claimTo } from "thirdweb/extensions/erc721";
+import { claimTo } from "thirdweb/extensions/erc1155";
 import { nftContract } from "@/lib/thirdweb-client";
 import { Rocket } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -13,6 +13,7 @@ export function MintButton() {
       transaction={() => claimTo({
         contract: nftContract,
         to: account?.address || "",
+        tokenId: 0n,
         quantity: 1n,
       })}
       onTransactionConfirmed={() => {

@@ -8,7 +8,7 @@ export const client = createThirdwebClient({
 export const nftContract = getContract({
   client,
   chain: base,
-  address: "0x3525fDbC54DC01121C8e12C3948187E6153Cdf25",
+  address: "0xba968fA5d5255d6D95bD23D69bA63De13ceFF731",
 });
 
 export const tokenContract = getContract({
