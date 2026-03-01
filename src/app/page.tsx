@@ -1,102 +1,139 @@
 'use client';
-import { ThirdwebProvider, ConnectButton, darkTheme } from "thirdweb/react";
-import { client } from "@/lib/thirdweb-client";
+import { 
+  ConnectButton, 
+  darkTheme, 
+  useActiveAccount,
+  useReadContract 
+} from "thirdweb/react";
+import { client, nftContract } from "@/lib/thirdweb-client";
 import { base } from "thirdweb/chains";
 import { SupplyCounter } from "@/components/SupplyCounter";
 import { MintButton } from "@/components/MintButton";
 import { ClaimTokenButton } from "@/components/ClaimTokenButton";
 import Image from "next/image";
-import { ShieldCheck, Info } from "lucide-react";
+import { ShieldCheck, Lock, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const account = useActiveAccount();
+  const [step, setStep] = useState(1);
+
+  // Check if already minted to progress step (Simplified for UI flow)
+  const { data: balance } = useReadContract({
+    contract: nftContract,
+    method: "function balanceOf(address, uint256) view returns (uint256)",
+    params: [account?.address || "0x0000000000000000000000000000000000000000", 0n],
+  });
+
+  useEffect(() => {
+    if (!account) {
+      setStep(1);
+    } else if (balance && balance > 0n) {
+      setStep(3);
+    } else if (account) {
+      setStep(2);
+    }
+  }, [account, balance]);
+
   return (
-    <ThirdwebProvider>
-      <main className="min-h-screen flex flex-col items-center justify-center p-4 relative">
-        {/* Animated Background Gradients */}
-        <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-lolcat-pink/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-lolcat-purple/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="fixed inset-0 cyber-grid opacity-30 pointer-events-none" />
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative matrix-bg">
+        {/* Neon Ambient Glows */}
+        <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-matrix-blue/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-lolcat-purple/10 blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="w-full max-w-[450px] relative z-10">
-          {/* Main Card */}
-          <div className="bg-white/5 border border-white/10 backdrop-blur-2xl p-6 rounded-[32px] shadow-glass-multi flex flex-col gap-6">
-            
-            {/* Hero Image Container */}
-            <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-2 border-lolcat-pink/30 group">
-              <Image 
-                src="https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg"
-                alt="MRxLOLCAT Hero"
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700 animate-float"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                <span className="bg-lolcat-pink text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-neon-pink">Base Mainnet</span>
+        <AnimatePresence>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-[450px] relative z-10"
+          >
+            {/* Main Premium Card */}
+            <div className="glass-card rounded-[32px] p-6 shadow-glass flex flex-col gap-6 overflow-hidden">
+              
+              {/* Electric Blue Matrix Hero */}
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-2 border-matrix-blue/30 group bg-matrix-dark">
+                <div className="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+                <Image 
+                  src="https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg"
+                  alt="MRxLOLCAT Matrix"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 animate-float mix-blend-screen"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-matrix-dark via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                  <span className="bg-matrix-blue text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-neon-blue">Matrix Protocol</span>
+                </div>
               </div>
-            </div>
 
-            {/* Title & Badge */}
-            <div className="text-center space-y-1">
-              <div className="flex items-center justify-center gap-2 text-lolcat-purple font-mono text-[10px] uppercase tracking-[0.3em]">
-                <ShieldCheck size={12} /> Verified Genesis
+              {/* Title Section */}
+              <div className="text-center space-y-2">
+                <div className="flex items-center justify-center gap-2 text-matrix-blue font-mono text-[10px] uppercase tracking-[0.4em] animate-pulse-glow">
+                  <ShieldCheck size={12} /> System Authenticated
+                </div>
+                <h1 className="text-4xl font-black italic tracking-tighter leading-none text-white uppercase">
+                  MRx<span className="text-matrix-blue">LOLCAT</span>
+                </h1>
+                <p className="text-zinc-500 text-xs font-medium">Sequential Genesis Protocol • Base Mainnet</p>
               </div>
-              <h1 className="text-4xl font-black italic tracking-tighter leading-none glow-pink text-lolcat-pink uppercase">
-                MRx<span className="text-white">LOLCAT</span>
-              </h1>
-              <p className="text-gray-500 text-xs font-medium">Join the elite circle. Unlock the cyberpunk future.</p>
-            </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-3">
               <SupplyCounter />
-              <div className="bg-white/5 border border-lolcat-purple/20 p-4 rounded-2xl text-center backdrop-blur-sm">
-                <p className="text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-1">Price</p>
-                <p className="text-2xl font-black text-lolcat-purple glow-purple tracking-tight uppercase">Free</p>
+
+              {/* Sequential Flow Steps */}
+              <div className="flex flex-col gap-4">
+                
+                {/* STEP 1: Connect */}
+                <div className={`p-4 rounded-2xl border transition-all ${step >= 1 ? 'border-matrix-blue/20 bg-matrix-blue/5' : 'border-white/5 opacity-50'}`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold text-matrix-blue tracking-widest uppercase">01. Authorization</span>
+                    {step > 1 ? <CheckCircle2 size={16} className="text-matrix-blue" /> : null}
+                  </div>
+                  <ConnectButton 
+                    client={client}
+                    chain={base}
+                    theme={darkTheme({ 
+                      colors: { accentText: "#00f2ff", accentButtonBg: "#00f2ff", modalBg: "#050505" } 
+                    })}
+                    connectButton={{ 
+                      className: "!w-full !py-3 !rounded-xl !bg-white/5 !text-white !font-black !border !border-white/10 !text-sm hover:!bg-white/10 transition-all",
+                      label: "CONNECT WALLET"
+                    }}
+                  />
+                </div>
+
+                {/* STEP 2: Mint */}
+                <div className={`p-4 rounded-2xl border transition-all ${step >= 2 ? 'border-lolcat-pink/20 bg-lolcat-pink/5' : 'border-white/5 opacity-50'}`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold text-lolcat-pink tracking-widest uppercase">02. Genesis Mint</span>
+                    {step > 2 ? <CheckCircle2 size={16} className="text-lolcat-pink" /> : step < 2 ? <Lock size={14} className="text-zinc-600" /> : null}
+                  </div>
+                  <MintButton disabled={step !== 2} />
+                </div>
+
+                {/* STEP 3: Claim */}
+                <div className={`p-4 rounded-2xl border transition-all ${step >= 3 ? 'border-lolcat-purple/20 bg-lolcat-purple/5' : 'border-white/5 opacity-50'}`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold text-lolcat-purple tracking-widest uppercase">03. Asset Distribution</span>
+                    {step < 3 ? <Lock size={14} className="text-zinc-600" /> : null}
+                  </div>
+                  <ClaimTokenButton disabled={step !== 3} />
+                </div>
+
+              </div>
+
+              {/* Footer technical data */}
+              <div className="pt-4 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-zinc-600">
+                <span>PROTOCOL: V1.0.5</span>
+                <span className="text-matrix-blue opacity-60 uppercase">Base ID: 8453</span>
               </div>
             </div>
 
-            {/* Actions */}
-            <div className="flex flex-col gap-3 pt-4 border-t border-white/5">
-              <ConnectButton 
-                client={client}
-                chain={base}
-                theme={darkTheme({ 
-                  colors: { 
-                    accentText: "#ff69b4", 
-                    accentButtonBg: "#ff69b4",
-                    modalBg: "#0a0a0a",
-                    borderColor: "#ffffff1a"
-                  } 
-                })}
-                connectButton={{ 
-                  className: "!w-full !py-3 !rounded-xl !bg-white/5 !text-white !font-black !border !border-white/10 !text-sm hover:!bg-white/10 transition-all",
-                  label: "CONNECT WALLET"
-                }}
-              />
-              <MintButton />
-              <ClaimTokenButton />
-            </div>
-
-          <div className="text-center mt-2 flex flex-col gap-1">
-            <a href="https://basescan.org/address/0xba968fA5d5255d6D95bD23D69bA63De13ceFF731" target="_blank" rel="noreferrer" className="text-[10px] text-gray-500 font-mono hover:text-[#ff69b4] flex items-center justify-center gap-1">
-              <Info size={10} /> 0xba96...EF731
-            </a>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <div className="flex items-center gap-1 text-[9px] text-gray-600 font-mono italic">
-             EditionDrop ERC-1155 (Token #0)
-          </div>
-        </div>
-
-          {/* Footer Branding */}
-          <p className="text-center mt-6 text-[10px] text-white/20 font-mono uppercase tracking-[0.5em]">
-            Built with love by MRxLOLCAT
-          </p>
-        </div>
+            <p className="text-center mt-6 text-[10px] text-white/20 font-mono uppercase tracking-[0.5em]">
+              Executed by MRxLOLCAT
+            </p>
+          </motion.div>
+        </AnimatePresence>
       </main>
-    </ThirdwebProvider>
   );
 }

@@ -10,10 +10,10 @@ export function SupplyCounter() {
   });
 
   return (
-    <div className="bg-white/5 border border-lolcat-pink/20 p-4 rounded-2xl text-center backdrop-blur-sm">
-      <p className="text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-1">Live Supply</p>
-      <p className="text-2xl font-black text-lolcat-pink glow-pink tracking-tight">
-        {isLoading ? "..." : (totalSupply?.toString() || "0")} <span className="text-sm opacity-30 font-normal">/ 10,000</span>
+    <div className="bg-matrix-blue/5 border border-matrix-blue/20 p-4 rounded-2xl text-center backdrop-blur-sm">
+      <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mb-1">Asset Supply Status</p>
+      <p className="text-2xl font-black text-matrix-blue tracking-tight glow-blue">
+        {isLoading ? "SCANNIG..." : (totalSupply?.toString() || "0")} <span className="text-xs opacity-30 font-normal">/ 10,000</span>
       </p>
     </div>
   );
