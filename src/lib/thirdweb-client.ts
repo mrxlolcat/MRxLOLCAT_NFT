@@ -10,3 +10,9 @@ export const nftContract = getContract({
   chain: base,
   address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "0xba968fA5d5255d6D95bD23D69bA63De13ceFF731",
 });
+
+export const tokenContract = getContract({
+  client,
+  chain: base,
+  address: "0x0000000000000000000000000000000000000000",
+});

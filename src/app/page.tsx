@@ -9,11 +9,17 @@ import {
 import { 
   useActiveAccount, 
   useReadContract,
-  TransactionButton
+  TransactionButton,
+  NFTProvider,
+  NFTMedia,
+  NFTName,
+  NFTDescription
 } from 'thirdweb/react';
 import { claimTo } from "thirdweb/extensions/erc1155";
-import { nftContract } from "@/lib/thirdweb-client";
+import { nftContract, client } from "@/lib/thirdweb-client";
 import { WalletConnector } from "@/components/WalletConnector";
+import { base } from "thirdweb/chains";
+import { darkTheme } from "thirdweb/react";
 import confetti from "canvas-confetti";
 
 export default function MRxLOLCATBaseApp() {
@@ -73,28 +79,35 @@ export default function MRxLOLCATBaseApp() {
 
       <div className="relative z-10 px-4 pt-6 space-y-8 pb-20">
         
-        {/* NFT Hero */}
+        {/* NFT Hero with Full Metadata Sync */}
         <section className="space-y-6">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative aspect-square w-full bg-[#0f172a] rounded-[32px] overflow-hidden border-2 border-white/5 shadow-2xl"
-          >
-            <Image 
-              src="https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg" 
-              alt="NFT" 
-              fill 
-              className="object-cover animate-float-slow" 
-              priority 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="bg-primary/20 text-primary text-[8px] font-black px-2 py-0.5 rounded-md border border-primary/20 uppercase tracking-widest">Legendary Pass</span>
+          <NFTProvider contract={nftContract} tokenId={0n}>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative aspect-square w-full bg-[#0f172a] rounded-[32px] overflow-hidden border-2 border-white/5 shadow-2xl group"
+            >
+              <NFTMedia 
+                className="object-cover w-full h-full animate-float-slow transition-transform duration-700 group-hover:scale-110" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-6 left-6 right-6 text-left">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="bg-primary/20 text-primary text-[8px] font-black px-2 py-0.5 rounded-md border border-primary/20 uppercase tracking-widest">
+                    Metadata Synchronized
+                  </span>
+                </div>
+                <NFTName 
+                  className="text-3xl font-black italic uppercase text-white leading-none tracking-tighter"
+                  loadingComponent={<div className="h-8 w-48 bg-white/10 animate-pulse rounded-lg" />}
+                />
+                <NFTDescription 
+                  className="text-[10px] text-zinc-400 font-medium italic mt-2 line-clamp-2 leading-tight"
+                  loadingComponent={<div className="h-4 w-64 bg-white/5 animate-pulse rounded mt-2" />}
+                />
               </div>
-              <h2 className="text-3xl font-black italic uppercase text-white leading-none tracking-tighter">Genesis Protocol</h2>
-            </div>
-          </motion.div>
+            </motion.div>
+          </NFTProvider>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
@@ -157,9 +170,9 @@ export default function MRxLOLCATBaseApp() {
               <div className="text-center p-8 border border-dashed border-white/10 rounded-2xl">
                 <Wallet className="mx-auto text-slate-600 mb-3" size={32} />
                 <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest italic mb-4">Authorization Required</p>
-                <div className="flex items-center gap-2 scale-90 origin-right">
-          <WalletConnector />
-        </div>
+                <div className="flex items-center gap-2 scale-90 origin-right justify-center">
+                  <WalletConnector />
+                </div>
               </div>
             )}
           </div>
