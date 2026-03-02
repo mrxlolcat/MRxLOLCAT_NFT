@@ -11,7 +11,7 @@ export async function GET() {
     imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
     buttonTitle: "Launch MRxLOLCAT",
     description: "MRxLOLCAT Genesis Collection on Base",
-    primaryCategory: "collectibles"
+    primaryCategory: "art-creativity"
   };
 
   return NextResponse.json({
