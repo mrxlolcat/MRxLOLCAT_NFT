@@ -33,7 +33,12 @@ export default function Navbar() {
           client={client}
           chain={base}
           wallets={wallets}
-          connectModal={{ size: "compact" }}
+          recommendedWallets={[farcasterFrameWallet()]}
+          connectModal={{ 
+            size: "compact",
+            title: "Connect to MRxLOLCAT",
+            showThirdwebBranding: false,
+          }}
           connectButton={{
             label: "Connect",
             className: "!bg-white !text-black !font-black !px-6 !py-2.5 !rounded-xl !text-xs !uppercase !tracking-widest hover:!bg-zinc-200 transition-all shadow-lg shadow-white/5",
