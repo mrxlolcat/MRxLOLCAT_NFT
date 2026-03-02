@@ -3,9 +3,10 @@
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
-import { inAppWallet, createWallet } from "thirdweb/wallets";
+import { inAppWallet, createWallet, farcasterFrameWallet } from "thirdweb/wallets";
 
 const wallets = [
+  farcasterFrameWallet(),
   createWallet("com.coinbase.wallet", {
     walletConfig: {
       options: "smartWalletOnly",
