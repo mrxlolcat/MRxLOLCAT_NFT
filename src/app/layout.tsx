@@ -8,6 +8,12 @@ import FarcasterSDKProvider from '@/components/FarcasterSDKProvider';
 export const metadata: Metadata = {
   title: 'MRxLOLCAT_NFT',
   description: 'MRxLOLCAT Genesis Collection on Base',
+  openGraph: {
+    title: 'MRxLOLCAT NFT',
+    description: 'MRxLOLCAT Genesis Collection on Base',
+    images: ['https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg'],
+    url: 'https://mrxlolcat-nft.vercel.app/',
+  },
   other: {
     "fc:miniapp": JSON.stringify({
       version: "next",
