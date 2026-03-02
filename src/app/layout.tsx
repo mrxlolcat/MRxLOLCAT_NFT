@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     images: ['https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg'],
   },
   other: {
+    "talentapp:project_verification": "ee7d3ed671fc42bd170353248f7fcd7495edd2211c95612ca58fc014fa4a1334dba6d5fcd83b4d34b75172cbf6c8b158e7189111a4fb59e8b10fb36fe29457e8",
     "fc:miniapp": JSON.stringify({
       version: "next",
       imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
