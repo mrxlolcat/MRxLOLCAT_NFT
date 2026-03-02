@@ -3,20 +3,21 @@
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
-import { createWallet, inAppWallet } from "thirdweb/wallets";
+import { createWallet } from "thirdweb/wallets";
 
-// Konfigurasi dompet untuk Farcaster Mini App
+// Konfigurasi dompet terbaru untuk menghindari redirect di Farcaster Mini App
 const wallets = [
-  // Gunakan inAppWallet dengan Farcaster strategi yang lebih stabil di v5
-  inAppWallet({
-    auth: {
-      options: ["farcaster"],
-    },
-  }),
+  // ✅ Farcaster Native Wallets
+  createWallet("farcaster:stack"),      // Stack (Farcaster native)
+  createWallet("farcaster:warpcast"),   // Warpcast direct
+  
+  // ✅ External Wallets
   createWallet("io.metamask"),
-  createWallet("me.rainbow"),
   createWallet("com.coinbase.wallet"),
+  createWallet("me.rainbow"),
   createWallet("io.rabby"),
+  createWallet("io.zerion.wallet"),
+  createWallet("com.okex.wallet"),
 ];
 
 export default function Navbar() {
@@ -35,9 +36,10 @@ export default function Navbar() {
           wallets={wallets}
           autoConnect={true}
           connectModal={{ 
-            size: "compact",
+            size: "wide", // Mengikuti preferensi snippet baru
             title: "Connect Wallet",
             showThirdwebBranding: false,
+            preferredWalletOrder: ["farcaster:stack", "farcaster:warpcast"]
           }}
           connectButton={{
             label: "Connect",

@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mrxlolcat-nft.vercel.app";
+  
   const miniAppConfig = {
     version: "1",
     name: "MRxLOLCAT_NFT",
     iconUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-    homeUrl: "https://mrxlolcat-nft.vercel.app/",
+    homeUrl: `${appUrl}/`,
     imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
     buttonTitle: "Launch MRxLOLCAT",
     description: "MRxLOLCAT Genesis Collection on Base",
@@ -13,6 +15,8 @@ export async function GET() {
   };
 
   return NextResponse.json({
+    // NOTE: accountAssociation signatures are domain-specific. 
+    // If you change the domain, you must generate a new signature.
     accountAssociation: {
       header: "eyJmaWQiOjg4MTU5NywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDdkRjBEMjAwRTQ3MmNkOGVBRDhFQTM1QmU3YTYzQTU4M0NiN2Y1NzMifQ",
       payload: "eyJkb21haW4iOiJtcnhsb2xjYXQtbmZ0LnZlcmNlbC5hcHAifQ",
