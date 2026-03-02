@@ -6,16 +6,18 @@ import { base } from "thirdweb/chains";
 import { inAppWallet, createWallet } from "thirdweb/wallets";
 
 const wallets = [
-  inAppWallet({
-    auth: {
-      options: ["farcaster", "coinbase"],
+  createWallet("com.coinbase.wallet", {
+    walletConfig: {
+      options: "smartWalletOnly",
     },
   }),
   createWallet("io.metamask"),
   createWallet("me.rainbow"),
-  createWallet("io.zerion.wallet"),
-  createWallet("io.rabby"),
-  createWallet("com.coinbase.wallet"),
+  inAppWallet({
+    auth: {
+      options: ["farcaster", "google", "email"],
+    },
+  }),
 ];
 
 export default function Navbar() {

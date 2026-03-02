@@ -1,28 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import sdk from '@farcaster/frame-sdk';
 
 export default function FarcasterSDKProvider({ children }: { children: React.ReactNode }) {
-  const [isReadyCalled, setIsReadyCalled] = useState(false);
-
   useEffect(() => {
-    if (typeof window !== 'undefined' && !isReadyCalled) {
-      const init = async () => {
-        try {
-          // Memberitahu Farcaster bahwa UI sudah siap
-          await sdk.actions.ready();
-          console.log("Farcaster SDK: ready() called successfully");
-          setIsReadyCalled(true);
-        } catch (error) {
-          console.error("Farcaster SDK: ready() error:", error);
+    const init = async () => {
+      try {
+        // Beritahu Farcaster UI siap
+        await sdk.actions.ready();
+        
+        // Cek context user Farcaster
+        const context = await sdk.context;
+        if (context?.user) {
+          console.log("Farcaster User detected:", context.user.username);
         }
-      };
+      } catch (error) {
+        console.error("Farcaster SDK initialization error:", error);
+      }
+    };
 
-      // Gunakan setTimeout 0 untuk memastikan DOM sudah dirender sepenuhnya
-      setTimeout(init, 0);
-    }
-  }, [isReadyCalled]);
+    init();
+  }, []);
 
   return <>{children}</>;
 }
