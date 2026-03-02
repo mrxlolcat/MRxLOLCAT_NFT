@@ -7,7 +7,9 @@ export async function GET() {
     iconUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
     homeUrl: "https://mrxlolcat-nft.vercel.app/",
     imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-    buttonTitle: "Launch MRxLOLCAT"
+    buttonTitle: "Launch MRxLOLCAT",
+    description: "MRxLOLCAT Genesis Collection on Base",
+    primaryCategory: "collectibles"
   };
 
   return NextResponse.json({
