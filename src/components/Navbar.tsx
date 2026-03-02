@@ -3,15 +3,15 @@
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
-import { farcasterFrameWallet, createWallet } from "thirdweb/wallets";
+import { createWallet } from "thirdweb/wallets";
 
-// Konfigurasi dompet: Hapus embedded/social wallet, gunakan ekstensi & native Farcaster
+// Konfigurasi dompet: Menggunakan createWallet dengan ID yang benar untuk Farcaster
 const wallets = [
-  farcasterFrameWallet(), // Dompet Internal Farcaster (Tanpa Redirect)
-  createWallet("io.metamask"), // MetaMask Extension
-  createWallet("me.rainbow"), // Rainbow Wallet
-  createWallet("com.coinbase.wallet"), // Coinbase Wallet / Smart Wallet
-  createWallet("io.rabby"), // Rabby Wallet
+  createWallet("app.farcaster"), // Dompet Internal Farcaster
+  createWallet("io.metamask"),
+  createWallet("me.rainbow"),
+  createWallet("com.coinbase.wallet"),
+  createWallet("io.rabby"),
 ];
 
 export default function Navbar() {
