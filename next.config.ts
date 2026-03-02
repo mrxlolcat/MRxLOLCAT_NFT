@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'gateway.ipfscdn.io' }
     ],
   },
-  transpilePackages: ["thirdweb"],
+  transpilePackages: ["thirdweb", "@farcaster/frame-sdk"],
 };
 
 export default nextConfig;
