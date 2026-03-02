@@ -3,6 +3,20 @@
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
+import { inAppWallet, createWallet } from "thirdweb/wallets";
+
+const wallets = [
+  inAppWallet({
+    auth: {
+      options: ["farcaster", "coinbase"],
+    },
+  }),
+  createWallet("io.metamask"),
+  createWallet("me.rainbow"),
+  createWallet("io.zerion.wallet"),
+  createWallet("io.rabby"),
+  createWallet("com.coinbase.wallet"),
+];
 
 export default function Navbar() {
   return (
@@ -15,6 +29,8 @@ export default function Navbar() {
         <ConnectButton
           client={client}
           chain={base}
+          wallets={wallets}
+          connectModal={{ size: "compact" }}
           connectButton={{
             label: "Connect",
             className: "!bg-white !text-black !font-black !px-6 !py-2.5 !rounded-xl !text-xs !uppercase !tracking-widest hover:!bg-zinc-200 transition-all shadow-lg shadow-white/5",
