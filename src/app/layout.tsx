@@ -21,6 +21,16 @@ export const metadata: Metadata = {
           splashBackgroundColor: "#111111",
         },
       },
+      frame: {
+        version: "1",
+        name: "MRxLOLCAT_NFT",
+        iconUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        homeUrl: "https://mrxlolcat-nft.vercel.app/",
+        imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        buttonTitle: "Launch MRxLOLCAT",
+        splashImageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        splashBackgroundColor: "#111111",
+      },
     }),
   },
 };
