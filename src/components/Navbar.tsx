@@ -3,7 +3,7 @@
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
-import { inAppWallet, createWallet, farcasterFrameWallet } from "thirdweb/wallets";
+import { farcasterFrameWallet, createWallet } from "thirdweb/wallets";
 
 const wallets = [
   farcasterFrameWallet(),
@@ -14,11 +14,6 @@ const wallets = [
   }),
   createWallet("io.metamask"),
   createWallet("me.rainbow"),
-  inAppWallet({
-    auth: {
-      options: ["google", "email", "apple"],
-    },
-  }),
 ];
 
 export default function Navbar() {
@@ -33,10 +28,10 @@ export default function Navbar() {
           client={client}
           chain={base}
           wallets={wallets}
-          recommendedWallets={[farcasterFrameWallet()]}
+          autoConnect={true}
           connectModal={{ 
             size: "compact",
-            title: "Connect to MRxLOLCAT",
+            title: "Connect Wallet",
             showThirdwebBranding: false,
           }}
           connectButton={{
