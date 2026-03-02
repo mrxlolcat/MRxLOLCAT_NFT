@@ -16,7 +16,7 @@ const wallets = [
   createWallet("me.rainbow"),
   inAppWallet({
     auth: {
-      options: ["farcaster", "google", "email"],
+      options: ["google", "email", "apple"],
     },
   }),
 ];
