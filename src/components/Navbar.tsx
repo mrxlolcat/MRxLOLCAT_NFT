@@ -5,15 +5,13 @@ import { client } from "@/lib/thirdweb";
 import { base } from "thirdweb/chains";
 import { farcasterFrameWallet, createWallet } from "thirdweb/wallets";
 
+// Konfigurasi dompet: Hapus embedded/social wallet, gunakan ekstensi & native Farcaster
 const wallets = [
-  farcasterFrameWallet(),
-  createWallet("com.coinbase.wallet", {
-    walletConfig: {
-      options: "smartWalletOnly",
-    },
-  }),
-  createWallet("io.metamask"),
-  createWallet("me.rainbow"),
+  farcasterFrameWallet(), // Dompet Internal Farcaster (Tanpa Redirect)
+  createWallet("io.metamask"), // MetaMask Extension
+  createWallet("me.rainbow"), // Rainbow Wallet
+  createWallet("com.coinbase.wallet"), // Coinbase Wallet / Smart Wallet
+  createWallet("io.rabby"), // Rabby Wallet
 ];
 
 export default function Navbar() {
@@ -21,7 +19,9 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#111111]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2">
-          <span className="text-xl font-black italic tracking-tighter text-white uppercase">MRx<span className="text-accent">LOL</span>CAT</span>
+          <span className="text-xl font-black italic tracking-tighter text-white uppercase">
+            MRx<span className="text-accent">LOL</span>CAT
+          </span>
         </div>
         
         <ConnectButton
@@ -31,7 +31,7 @@ export default function Navbar() {
           autoConnect={true}
           connectModal={{ 
             size: "compact",
-            title: "Connect Wallet",
+            title: "Choose Wallet",
             showThirdwebBranding: false,
           }}
           connectButton={{
