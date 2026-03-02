@@ -3,6 +3,7 @@ import './globals.css';
 import { ThirdwebProvider } from "thirdweb/react";
 import Navbar from '@/components/Navbar';
 import { Toaster } from "sonner";
+import FarcasterSDKProvider from '@/components/FarcasterSDKProvider';
 
 export const metadata: Metadata = {
   title: 'MRxLOLCAT_NFT',
@@ -37,11 +38,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-[#111111] text-white cyber-grid min-h-screen">
-        <ThirdwebProvider>
-          <Toaster position="bottom-right" richColors theme="dark" />
-          <Navbar />
-          {children}
-        </ThirdwebProvider>
+        <FarcasterSDKProvider>
+          <ThirdwebProvider>
+            <Toaster position="bottom-right" richColors theme="dark" />
+            <Navbar />
+            {children}
+          </ThirdwebProvider>
+        </FarcasterSDKProvider>
       </body>
     </html>
   );
