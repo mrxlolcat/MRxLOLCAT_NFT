@@ -13,9 +13,7 @@ export async function GET() {
       iconUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
       homeUrl: "https://mrxlolcat-nft.vercel.app/",
       imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-      buttonTitle: "Launch MRxLOLCAT",
-      splashImageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-      splashBackgroundColor: "#111111"
+      buttonTitle: "Launch MRxLOLCAT"
     }
   });
 }

@@ -17,8 +17,6 @@ export const metadata: Metadata = {
           type: "launch_miniapp",
           name: "MRxLOLCAT_NFT",
           url: "https://mrxlolcat-nft.vercel.app/",
-          splashImageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-          splashBackgroundColor: "#111111",
         },
       },
       frame: {
@@ -28,8 +26,6 @@ export const metadata: Metadata = {
         homeUrl: "https://mrxlolcat-nft.vercel.app/",
         imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
         buttonTitle: "Launch MRxLOLCAT",
-        splashImageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
-        splashBackgroundColor: "#111111",
       },
     }),
   },
