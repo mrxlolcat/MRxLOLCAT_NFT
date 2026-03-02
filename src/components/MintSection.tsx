@@ -34,7 +34,7 @@ export default function MintSection() {
           transaction={() => claimTo({
             contract: nftContract,
             to: account?.address || "0x0000000000000000000000000000000000000000",
-            tokenId: 0n,
+            tokenId: BigInt(0),
             quantity: BigInt(quantity),
           })}
           onTransactionConfirmed={() => {

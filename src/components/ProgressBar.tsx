@@ -14,7 +14,7 @@ export default function ProgressBar() {
   const { data: totalSupply } = useReadContract({
     contract: nftContract,
     method: "function totalSupply(uint256 id) view returns (uint256)",
-    params: [0n],
+    params: [BigInt(0)],
   });
 
   const total = 6969;

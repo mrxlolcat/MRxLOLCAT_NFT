@@ -2,12 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'ipfs.io' },
-      { protocol: 'https', hostname: 'i.seadn.io' }
+      { protocol: 'https', hostname: 'i.seadn.io' },
+      { protocol: 'https', hostname: '**.ipfs.nftstorage.link' },
+      { protocol: 'https', hostname: 'gateway.ipfscdn.io' }
     ],
   },
   transpilePackages: ["thirdweb"],
