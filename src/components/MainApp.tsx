@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Share2, Terminal, Cat, Zap } from 'lucide-react';
+import { CheckCircle2, Terminal, Cat, Zap } from 'lucide-react';
 import { useActiveAccount, useReadContract, TransactionButton } from 'thirdweb/react';
 import { claimTo } from "thirdweb/extensions/erc1155";
 import { nftContract } from "@/lib/thirdweb-client";
@@ -40,8 +40,8 @@ export default function MainApp() {
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#ff0080]/10 blur-[120px] rounded-full pointer-events-none" />
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-[420px] relative z-10"
       >
         <div className="rounded-[48px] p-[2px] bg-gradient-to-br from-[#00f2ff] via-white/10 to-[#ff0080] shadow-2xl">
@@ -50,7 +50,7 @@ export default function MainApp() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
                 <Cat size={14} className="text-[#00f2ff]" />
-                <span className="text-[10px] font-black tracking-widest text-white/60 uppercase">GENESIS_MODE</span>
+                <span className="text-[10px] font-black tracking-widest text-white/60 uppercase">GENESIS_VIBE</span>
               </div>
               <WalletConnector />
             </div>
@@ -59,30 +59,30 @@ export default function MainApp() {
               <h1 className="text-5xl font-black italic tracking-tighter uppercase leading-none text-white">
                 MRx<span className="text-[#00f2ff]">LOL</span>CAT
               </h1>
-              <p className="text-[10px] font-bold text-[#ff0080] tracking-[0.6em] uppercase">Digital Collectibles</p>
+              <p className="text-[10px] font-bold text-[#ff0080] tracking-[0.6em] uppercase">Vibe Portal</p>
             </header>
 
             <div className="relative aspect-square w-full rounded-[40px] overflow-hidden border border-white/10 group shadow-2xl bg-black">
               <img 
                 src="https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg" 
-                alt="NFT Preview"
+                alt="NFT"
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className="px-2 py-0.5 bg-white text-black text-[8px] font-black rounded uppercase mb-2 inline-block shadow-lg">Live on Base</span>
-                <h2 className="text-3xl font-black italic text-white uppercase tracking-tighter block drop-shadow-xl">GENESIS PASS</h2>
+              <div className="absolute bottom-6 left-6 right-6 text-left">
+                <span className="px-2 py-0.5 bg-white text-black text-[8px] font-black rounded uppercase mb-2 inline-block">Official Collection</span>
+                <h2 className="text-2xl font-black italic text-white uppercase tracking-tighter block">Genesis Pass</h2>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="p-4 rounded-3xl bg-white/5 border border-white/5 text-center">
-                <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Supplied</p>
-                <p className="text-2xl font-black text-white">{totalSupply?.toString() || "0"}</p>
+                <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Supply</p>
+                <p className="text-xl font-black text-white">{totalSupply?.toString() || "0"}</p>
               </div>
               <div className="p-4 rounded-3xl bg-white/5 border border-white/5 text-center">
-                <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Minting</p>
-                <p className="text-2xl font-black text-[#00f2ff]">FREE</p>
+                <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Price</p>
+                <p className="text-xl font-black text-[#00f2ff]">FREE</p>
               </div>
             </div>
 
@@ -91,14 +91,14 @@ export default function MainApp() {
                 <div className="space-y-3">
                   <div className="p-5 rounded-[32px] bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-4">
                     <CheckCircle2 className="text-emerald-400" size={24} />
-                    <p className="text-[11px] font-black text-white uppercase tracking-wider">Pass Verified in Wallet</p>
+                    <p className="text-[11px] font-black text-white uppercase">Verified Ownership</p>
                   </div>
                   <a 
                     href="https://basescan.org/address/0xba968fA5d5255d6D95bD23D69bA63De13ceFF731" 
                     target="_blank"
                     className="w-full bg-white/5 border border-white/10 text-white font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
                   >
-                    <Terminal size={14} /> View on Basescan
+                    <Terminal size={14} /> Explorer
                   </a>
                 </div>
               ) : account ? (
@@ -111,23 +111,22 @@ export default function MainApp() {
                   })}
                   onTransactionConfirmed={() => {
                     confetti();
-                    toast.success("MINT SUCCESSFUL");
+                    toast.success("Mint Success!");
                   }}
-                  onError={(err) => toast.error("MINT FAILED: " + err.message)}
-                  className="!w-full !bg-white !text-black !font-black !py-6 !rounded-[28px] !text-sm !uppercase !tracking-[0.4em] !shadow-2xl hover:!scale-[1.02] transition-all"
+                  onError={(err) => toast.error("Error: " + err.message)}
+                  className="!w-full !bg-white !text-black !font-black !py-6 !rounded-[28px] !text-sm !uppercase !shadow-2xl"
                 >
-                  INITIALIZE MINT
+                  MINT NFT
                 </TransactionButton>
               ) : (
                 <div className="p-8 rounded-[40px] bg-white/5 border border-dashed border-white/10 text-center">
-                  <Zap className="mx-auto text-[#00f2ff] mb-3 animate-pulse" size={32} />
-                  <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.4em] mb-5">Access Connection Required</p>
+                  <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.4em] mb-5">Access Required</p>
                   <div className="flex justify-center scale-110"><WalletConnector /></div>
                 </div>
               )}
             </div>
 
-            <footer className="pt-2 flex flex-col items-center gap-1 opacity-20">
+            <footer className="pt-2 opacity-20">
               <p className="text-[10px] font-black tracking-[0.6em] uppercase text-white">MRxLOLCAT ONLY</p>
             </footer>
 
