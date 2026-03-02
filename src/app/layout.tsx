@@ -9,6 +9,26 @@ export const metadata: Metadata = {
   title: 'MRxLOLCAT_NFT',
   description: 'MRxLOLCAT Genesis Collection on Base',
   other: {
+    "fc:miniapp": JSON.stringify({
+      version: "next",
+      imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+      button: {
+        title: "Launch MRxLOLCAT",
+        action: {
+          type: "launch_miniapp",
+          name: "MRxLOLCAT_NFT",
+          url: "https://mrxlolcat-nft.vercel.app/",
+        },
+      },
+      frame: {
+        version: "1",
+        name: "MRxLOLCAT_NFT",
+        iconUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        homeUrl: "https://mrxlolcat-nft.vercel.app/",
+        imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
+        buttonTitle: "Launch MRxLOLCAT",
+      },
+    }),
     "fc:frame": JSON.stringify({
       version: "next",
       imageUrl: "https://ipfs.io/ipfs/QmaxJiJ3RQSDvuHNw5DearPFLdU8cA2L5dxDd9UWMwLUex/0.jpeg",
