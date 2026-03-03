@@ -4,7 +4,7 @@ import { ThirdwebProvider } from "thirdweb/react";
 import Navbar from '@/components/Navbar';
 import { Toaster } from "sonner";
 import FarcasterSDKProvider from '@/components/FarcasterSDKProvider';
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mrxlolcat-nft.vercel.app";
